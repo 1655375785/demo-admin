@@ -1,5 +1,7 @@
 package com.demo.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,16 @@ public class UserUtil {
 
     public static void put(String key, String value){
         FileUtil.writeToFile(key, value);
-         userMap.put(key,value);
+        userMap.put(key,value);
+    }
+
+    public static String get(String key){
+        String resource = userMap.get(key);
+        if(StringUtils.isBlank(resource)){
+            userMap = FileUtil.readFromFile();
+            return userMap.get(key);
+        }
+        return resource;
     }
 
 }

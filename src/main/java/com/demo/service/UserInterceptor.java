@@ -2,7 +2,10 @@ package com.demo.service;
 
 import com.alibaba.fastjson.JSON;
 import com.demo.param.User;
+import com.demo.utils.FileUtil;
 import com.demo.utils.UserContext;
+import com.demo.utils.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -28,12 +31,19 @@ public class UserInterceptor implements HandlerInterceptor {
         }
         String lastPart = parts[parts.length - 1];
         User user = UserContext.getUser();
-        String[] resources = user.getEndpoint();
+        String userValue = UserUtil.get(user.getUserId());
+        if (StringUtils.isBlank(userValue)){
+            response.sendRedirect("/error/permission");
+            return false;
+        }
+        User resUser = JSON.parseObject(userValue, User.class);
+        String[] resources = resUser.getEndpoint();
         for (int i = 0; i < resources.length; i++) {
             if(lastPart.equals(resources[i])){
                 return true;
             }
         }
+        response.sendRedirect("/error/permission");
         return false;
 
     }

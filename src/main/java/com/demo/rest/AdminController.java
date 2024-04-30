@@ -29,13 +29,13 @@ public class AdminController {
 
 
     @PostMapping(value = "/addUser")
-    public String addUser(User user){
+    public String addUser(@RequestBody User user){
         User loginUser = UserContext.getUser();
         if("admin".equals(loginUser.getRole())){
             UserUtil.put(user.getUserId(), JSON.toJSONString(user));
             return "success";
         }else{
-            return "没有权限！";
+            return "no permission！";
         }
     }
 

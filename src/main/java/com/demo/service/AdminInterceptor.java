@@ -28,9 +28,14 @@ public class AdminInterceptor implements HandlerInterceptor {
             UserContext.setUser(user);
             return true;
         }
-
+        response.sendRedirect("/error/permission");
         return false;
 
+    }
+
+    public static void main(String[] args) {
+        byte[] str = Base64.getEncoder().encode("{\"userId\":\"1234\",\"role\":\"test\"}".getBytes());
+        System.out.println(new String(str));
     }
 
     @Override

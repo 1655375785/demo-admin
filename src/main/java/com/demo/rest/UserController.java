@@ -4,6 +4,7 @@ import com.demo.param.User;
 import com.demo.utils.UserContext;
 import com.demo.utils.UserUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    @PostMapping(value = "/{resource}")
+    @GetMapping(value = "/{resource}")
     public String view(String str){
         return "success";
     }

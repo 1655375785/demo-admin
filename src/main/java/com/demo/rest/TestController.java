@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/")
+@RequestMapping("/error")
 public class TestController {
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/permission")
     public String view(){
-        return "success";
+        return "no permission";
     }
 
 }
